@@ -13,4 +13,6 @@ router.post('/', AirplaneMiddlewares.validateCreateRequest, AirplaneController.c
 // /api/v1/airplanes GET
 router.get('/', AirplaneController.getAirplanes);
 
+router.get('/:id',AirplaneController.getAirplane);
+
 module.exports = router;
