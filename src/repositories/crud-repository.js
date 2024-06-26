@@ -11,13 +11,12 @@ class crudRepository {
     }
 
     async destroy(data) {
-            const response = await this.model.destroy({
-                where: {
-                    id: data
-                }
-            });
-            return response;
-        }
+        const response = await this.model.destroy({
+            where: {
+                id: data
+            }
+        });
+        return response;
     }
 
     async get(data) {
@@ -30,13 +29,14 @@ class crudRepository {
         return response;
     }
 
-    async update(id,data) { // data -> {col: value....} i.e object 
-        const response = await this.model.update(data,{
-                where: {
-                    id:id
-                }
-            });
+    async update(id, data) { // data -> {col: value....} i.e object 
+        const response = await this.model.update(data, {
+            where: {
+                id: id
+            }
+        });
         return response;
+    }
 }
 
 module.exports = crudRepository;
