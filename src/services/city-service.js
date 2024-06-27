@@ -19,8 +19,8 @@ async function createCity(data) {
         explanation.push(err.message);
       });
       throw new AppError(explanation, StatusCodes.BAD_REQUEST);
-      throw new AppError("Cannot create a new city object");
     }
+    throw new AppError("Cannot create a new city object");
   }
 }
 
@@ -36,8 +36,38 @@ async function destroyCity(id) {
   }
 }
 
+async function updateCity(id,data) {
+  try {
+
+      const existingCity = await cityRepository.get(id);
+      if (!existingCity) {
+          throw new AppError('City not found', StatusCodes.NOT_FOUND);
+      }
+      await cityRepository.update(id,data);
+      const city = await cityRepository.get(id);
+      return city ;
+  } catch (error) {
+      console.log(error);
+      if (error.name == 'SequelizeValidationError') {
+          let explanation = [];
+          error.errors.forEach((err) => {
+              explanation.push(err.message);
+          });
+          throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+      }
+
+      if (error.statusCode == StatusCodes.NOT_FOUND) {
+          throw new AppError('The city you requested to update is not present', error.statusCode);
+      }
+
+      throw new AppError('Cannot create a new city object',StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
+
 
 module.exports = {
   createCity,
-  destroyCity
+  destroyCity,
+  updateCity
 };
