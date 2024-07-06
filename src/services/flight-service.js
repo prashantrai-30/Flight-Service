@@ -27,7 +27,7 @@ async function createFlight(data) {
 
 async function getAllFlights(query) {
   let customFilter = {};
-  let sortFliter = [];
+  let sortFilter = [];
   const endingtriptime = "23:59:00";
   //trips = DEL-MUM
   if (query.trips) {
@@ -60,11 +60,11 @@ async function getAllFlights(query) {
     const sortFilters = params.map((param) => param.split('_'));
     sortFilter = sortFilters;
   }
-  console.log(customFilter,sortFilter);
     try {
         const flights = await flightRepository.getAllFlights(customFilter,sortFilter);
         return flights;
         } catch (error) {
+          console.log(error);
           throw new AppError('cannot fetch data of all the flight', StatusCodes.INTERNAL_SERVER_ERROR);
         }
 }
