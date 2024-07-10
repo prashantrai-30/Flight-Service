@@ -11,4 +11,6 @@ router.post('/',FlightMiddlewares.validateCreateRequest,FlightController.createF
 
 router.get('/',FlightController.getAllFlights);
 
+router.get('/:id',FlightController.getFlight);
+
 module.exports = router;
