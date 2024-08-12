@@ -4,7 +4,7 @@
   "description": "A basic starter boilerplate project  for node",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon src/index.js"
+    "dev": "nodemon src/index.js"
   },
   "author": "Prashant",
   "license": "ISC",
